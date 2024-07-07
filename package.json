@@ -1,0 +1,19 @@
+{
+  "name": "jzz-tab",
+  "version": "0.0.0",
+  "description": "coming soon...",
+  "main": "jzz-tab.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jazz-soft/jzz-tab.git"
+  },
+  "author": "jazz-soft (https://jazz-soft.net/)",
+  "devDependencies": {
+  },
+  "homepage": "https://github.com/jazz-soft/jzz-tab#readme",
+  "bugs": "https://github.com/jazz-soft/jzz-tab/issues",
+  "license": "MIT"
+}
