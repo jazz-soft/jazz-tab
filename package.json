@@ -4,7 +4,7 @@
   "description": "coming soon...",
   "main": "jzz-tab.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc mocha"
   },
   "repository": {
     "type": "git",
@@ -12,6 +12,8 @@
   },
   "author": "jazz-soft (https://jazz-soft.net/)",
   "devDependencies": {
+    "mocha": "^10.6.0",
+    "nyc": "^17.0.0"
   },
   "homepage": "https://github.com/jazz-soft/jzz-tab#readme",
   "bugs": "https://github.com/jazz-soft/jzz-tab/issues",
