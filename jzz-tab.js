@@ -9,19 +9,22 @@ function Parser(s, opt) {
       this.cut();
       this.prev++;
     }
-    else if (c == '|') {
+    else if (c == '|' || c == '&' || c == '(' || c == ')') {
       this.cut();
       this.cur++;
-      this.cut();
+      this.cut(c);
     }
     this.cur++;
   }
   this.cut();
 }
 
-Parser.prototype.cut = function() {
+Parser.prototype.cut = function(t) {
   if (this.prev != this.cur) {
-    this.tok.push({ from: this.prev, to: this.cur, txt: this.txt.substring(this.prev, this.cur) });
+    this.tok.push(t ?
+      { from: this.prev, to: this.cur, txt: this.txt.substring(this.prev, this.cur), type: t } :
+      { from: this.prev, to: this.cur, txt: this.txt.substring(this.prev, this.cur) }
+    );
     this.prev = this.cur;
   }
 }
