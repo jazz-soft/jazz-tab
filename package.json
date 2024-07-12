@@ -4,7 +4,8 @@
   "description": "coming soon...",
   "main": "jzz-tab.js",
   "scripts": {
-    "test": "nyc mocha"
+    "test": "nyc mocha",
+    "coverage": "nyc report --reporter=lcov"
   },
   "repository": {
     "type": "git",
