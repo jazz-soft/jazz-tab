@@ -1,5 +1,6 @@
 function Parser(s, opt) {
   this.txt = s;
+  this.opt = opt;
   this.prev = 0;
   this.cur = 0;
   this.tok = [];
@@ -14,6 +15,8 @@ function Parser(s, opt) {
       this.cur++;
       this.cut(c);
     }
+    else if (this.readNote()) {
+    }
     this.cur++;
   }
   this.cut();
@@ -27,6 +30,11 @@ Parser.prototype.cut = function(t) {
     );
     this.prev = this.cur;
   }
+}
+
+Parser.prototype.readNote = function() {
+  if (this.opt && !this.opt.m) return false;
+  var p = this.cur;
 }
 
 module.exports = {
