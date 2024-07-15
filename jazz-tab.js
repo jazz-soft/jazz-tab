@@ -35,6 +35,31 @@ Parser.prototype.cut = function(t) {
 Parser.prototype.readNote = function() {
   if (this.opt && !this.opt.m) return false;
   var p = this.cur;
+  var c = this.txt[p];
+  var n = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 }[c];
+  if (typeof n == 'undefined') return false;
+  p++; c = this.txt[p];
+  if (c == '#') {
+    n++;
+    p++; c = this.txt[p];
+  }
+  else if (c == 'b') {
+    n--;
+    p++; c = this.txt[p];
+  }
+  if (c >= 0 && c <=9) {
+    n += c * 12;
+    if (n < 0) return false; // e.g. Cb0
+    p++;
+    if (c == 1 && this.txt[p] == 0 && n + 9 * 12 < 128) { // e.g. C#10
+      p++; n += 9 * 12;
+    }
+    this.cut();
+    this.cur = p;
+    this.cut('m');
+    return true;
+  }
+  return false;
 }
 
 module.exports = {
