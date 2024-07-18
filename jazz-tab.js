@@ -13,21 +13,22 @@ function Parser(s, opt) {
     else if (c == '|' || c == '&' || c == '(' || c == ')') {
       this.cut();
       this.cur++;
-      this.cut(c);
+      this.cut({ t: c });
+      continue;
     }
     else if (this.readNote()) {
+      continue;
     }
     this.cur++;
   }
   this.cut();
 }
 
-Parser.prototype.cut = function(t) {
+Parser.prototype.cut = function(o) {
   if (this.prev != this.cur) {
-    this.tok.push(t ?
-      { from: this.prev, to: this.cur, txt: this.txt.substring(this.prev, this.cur), type: t } :
-      { from: this.prev, to: this.cur, txt: this.txt.substring(this.prev, this.cur) }
-    );
+    var x = { from: this.prev, to: this.cur, txt: this.txt.substring(this.prev, this.cur) };
+    if (o) for (var k of Object.keys(o)) x[k] = o[k];
+    this.tok.push(x);
     this.prev = this.cur;
   }
 }
@@ -56,7 +57,7 @@ Parser.prototype.readNote = function() {
     }
     this.cut();
     this.cur = p;
-    this.cut('m');
+    this.cut({ t: 'm', m: n });
     return true;
   }
   return false;
